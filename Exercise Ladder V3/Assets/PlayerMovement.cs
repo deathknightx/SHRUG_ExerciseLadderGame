@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	private int desiredFloor;
 
+	public float[] floors = {280f, 170f, 60f, -60f, -170f, -290f};
+
 	public float speed ;
 
 	private float startTime;
@@ -26,8 +28,6 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		generateNextPosition ();
 	}
-		
-
 
 	// Update is called once per frame
 	void Update () 
@@ -49,7 +49,6 @@ public class PlayerMovement : MonoBehaviour {
 
 			transform.position = tmp;
 		}
-
 	}
 
 	bool StartWalking()
@@ -64,22 +63,25 @@ public class PlayerMovement : MonoBehaviour {
 	void generateNextPosition()
 	{
 		int currentFloor = desiredFloor;
-		desiredFloor = Random.Range (0, 5);
+		desiredFloor = floors.Length/floors.Length * yPosArray.Length;
 
 		int barStart = Random.Range (0, currentFloor);
 		int barEnd = Random.Range (barStart, 5);
 
-//		if (currentFloor = 0) 
-//		{
-//
-//		}
+		/*if (currentFloor != desiredFloor)
+		{
+			for (int i = 5; i - 1 < floors.Length; i--)
+			{
+				
+			}
+		}*/
 
 		// Set character positions
 		startPos = transform.position;
 		newPos = new Vector2(xPosArray[Random.Range(0, xPosArray.Length)], yPosArray[Random.Range(0, yPosArray.Length)]);
 		journeyLength = Vector2.Distance (startPos, newPos);
 
-		Debug.Log (newPos);
+		print (newPos);
 
 	}
 
@@ -94,5 +96,6 @@ public class PlayerMovement : MonoBehaviour {
 
 
 	}
+
 
 }
